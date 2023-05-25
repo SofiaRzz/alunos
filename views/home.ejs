@@ -1,33 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+    td,
+    th {
+      border: 1px solid black;
+      padding: 5px;
+    }
+  </style>
+  <body>
     <h1>Alunos</h1>
-    <a href="/cadastro-edicao">Cadastrar Novo Aluno</a>
+    <a href="/cad-alt">Cadastrar Novo Aluno</a>
     <table>
-        <tr>
-            <td>Nome</td>
-            <td>Data de Nascimento</td>
-            <td>Matrícula</td>
-            <td>Status</td>
-            <td>E-mail</td>
-        </tr>
-        <% for (let i = 0; i <= alunos.length; i++) {%>
-        <tr>
-            <td> <%= alunos[i].nome %></td>
-            <td> <%= alunos[i].dataNasc %></td>
-            <td> <%= alunos[i].matricula %></td>
-            <td> <%= alunos[i].status %></td>
-            <td> <%= alunos[i].email %></td>
-            <td><button>Alterar</button></td>
-            <td><button>Excluir</button></td>
-        </tr>
+      <tr>
+        <td>Nome</td>
+        <td>Data de Nascimento</td>
+        <td>Matrícula</td>
+        <td>Status</td>
+        <td>E-mail</td>
+        <td colspan="2"></td>
+      </tr>
+      <% for (let i = 0; i < alunos.length; i++) {%>
+      <tr>
+        <td><%= alunos[i].nome %></td>
+        <td><%= alunos[i].dataNasc %></td>
+        <td><%= alunos[i].matricula %></td>
+        <td><%= alunos[i].status %></td>
+        <td><%= alunos[i].email %></td>
+        <td><a href="/cad-alt/<%=alunos[i].id%>">Alterar</a></td>
+        <td><button onclick="deletar('<%=alunos[i].id%>')">Excluir</button></td>
+      </tr>
+      <% } %>
     </table>
 
-</body>
+    <script>
+      function deletar(id) {
+        fetch("/alunos/" + id, {
+          method: "DELETE",
+        }).then((window.location.href = "/"));
+      }
+    </script>
+  </body>
 </html>

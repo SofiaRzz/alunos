@@ -1,30 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=, initial-scale=1.0">
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <form action="">
-        <table>
-            <tr>                
-                <label for=""><input type="text">Nome</label>
-            </tr>
-            <tr>
-                <label for=""><input type="date">Data de Nascimento</label>
-            </tr>
-            <tr>
-                <label for=""><input type="text">Matrícula</label>
-            </tr>
-            <tr>
-                <label for=""><input type="select">Status</label>
-            </tr>
-            <tr>
-                <label for=""><input type="text">E-mail</label>
-            </tr>
-        </table>
+    <style></style>
+  </head>
+  <body>
+    <h1>Cadastro ou Alteração</h1>
+    <form action="/alunos<%= aluno ? '/'+ aluno.id : '' %>" method="POST">
+      <table>
+        <tr>
+          <th>
+            <label for="">Nome</label>
+          </th>
+          <td>
+            <input
+              type="text"
+              name="nome"
+              required
+              value="<%=aluno ? aluno.nome: '' %>"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <label for="">Data de Nascimento</label>
+          </th>
+          <td>
+            <input
+              type="date"
+              name="dataNasc"
+              required
+              value="<%=aluno ? aluno.dataNasc: '' %>"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <label for="">Matrícula</label>
+          </th>
+          <td>
+            <input
+              type="text"
+              name="matricula"
+              required
+              value="<%=aluno ? aluno.matricula : '' %>"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <label for="">Status</label>
+          </th>
+          <td>
+            <select name="status" id="">
+              <option value="Ativa">Ativa</option>
+              <option value="Inativa">Inativa</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <label for="">E-mail</label>
+          </th>
+          <td>
+            <input
+              type="email"
+              name="email"
+              required
+              value="<%=aluno ? aluno.email: '' %>"
+            />
+          </td>
+        </tr>
+      </table>
+      <button type="submit">Salvar</button>
+      <a href="/">Cancelar</a>
     </form>
-</body>
+  </body>
 </html>
