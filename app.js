@@ -37,7 +37,7 @@ const alunos = [
 ];
 
 app.get("/", (req, res) => {
-  res.render("home", { alunos: alunos });
+  res.render("home", {alunos: alunos });
 });
 
 app.get("/cad-alt/:id?", (req, res) => {
@@ -48,7 +48,6 @@ app.get("/cad-alt/:id?", (req, res) => {
   } else {
     res.render("cad-alt", { aluno: null });
   }
-  res.render("cad-alt");
 });
 
 app.delete("/alunos/:id", (req, res) => {
