@@ -20,13 +20,13 @@ const alunos = [
     matricula: "2021321147",
     status: true,
     email: "spr2@aluno.ifal.edu.br"
-    }
+    },
     {nome: "Lucas",
     dataNasc: "2005-04-16",
     matricula: "2021319327",
     status: true,
     email: "mlfd1@aluno.ifal.edu.br"
-    }
+    },
     {nome: "Fernanda",
     dataNasc: "2006-05-12",
     matricula: "2021312245",
