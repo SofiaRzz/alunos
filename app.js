@@ -1,4 +1,6 @@
 import express from "express";
+import {create, update, deleta, readAll, readOne} from './conexao.js';
+import sequelize from "./db.js";
 
 const app = express();
 const port = 3000;
@@ -37,13 +39,14 @@ const alunos = [
 ];
 
 app.get("/", (req, res) => {
-  res.render("home", {alunos: alunos });
+  res.render("home", {alunos: readAll()});
 });
 
 app.get("/cad-alt/:id?", (req, res) => {
   if (req.params.id) {
     const id = Number(req.params.id);
-    const aluno = alunos.find((aluno) => aluno.id == id);
+    const aluno = readOne(id)
+    //const aluno = alunos.find((aluno) => aluno.id == id);
     res.render("cad-alt", { aluno: aluno });
   } else {
     res.render("cad-alt", { aluno: null });
@@ -51,40 +54,48 @@ app.get("/cad-alt/:id?", (req, res) => {
 });
 
 app.delete("/alunos/:id", (req, res) => {
-  const id = Number(req.params.id);
-  for (let i = 0; i < alunos.length; i++) {
-    if (alunos[i].id == id) {
-      alunos.splice(i, 1);
-      break;
-    }
+  deleta(req.params.id)
+
+  // const id = Number(req.params.id);
+  // for (let i = 0; i < alunos.length; i++) {
+  //   if (alunos[i].id == id) {
+  //     alunos.splice(i, 1);
+  //     break;
+  //   }
   }
-});
+);
 
 app.post("/alunos/:id?", (req, res) => {
   if (req.params.id) {
-    const id = Number(req.params.id);
-    const index = alunos.findIndex((aluno) => aluno.id == id);
-    alunos[index] = {
-      id: id,
-      nome: req.body.nome,
-      dataNasc: req.body.dataNasc,
-      matricula: req.body.matricula,
-      status: req.body.status,
-      email: req.body.email,
-    };
+    update(req.body)
+
+    // const id = Number(req.params.id);
+    // const index = alunos.findIndex((aluno) => aluno.id == id);
+    // alunos[index] = {
+    //   id: id,
+    //   nome: req.body.nome,
+    //   dataNasc: req.body.dataNasc,
+    //   matricula: req.body.matricula,
+    //   status: req.body.status,
+    //   email: req.body.email,
+    // };
+
   } else {
-    alunos.push({
-      id: alunos.at(-1).id + 1,
-      nome: req.body.nome,
-      dataNasc: req.body.dataNasc,
-      matricula: req.body.matricula,
-      status: req.body.status,
-      email: req.body.email,
-    });
+      create(req.body)
+
+    // alunos.push({
+    //   id: alunos.at(-1).id + 1,
+    //   nome: req.body.nome,
+    //   dataNasc: req.body.dataNasc,
+    //   matricula: req.body.matricula,
+    //   status: req.body.status,
+    //   email: req.body.email,
+    // });
   }
   res.redirect("/");
 });
 
 app.listen(port, () => {
+  sequelize.sync()
   console.log("Servidor rodando");
 });
