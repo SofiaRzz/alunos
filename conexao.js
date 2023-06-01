@@ -32,9 +32,9 @@ export async function deleta(id){
 }
 
 export async function readAll(){
-    return const alunos = await Aluno.findAll();
+    return await Aluno.findAll();
 }
 
 export async function readOne(id){
-    return const livros = await Aluno.findByPk(id);
+    return await Aluno.findByPk(id);
 }
