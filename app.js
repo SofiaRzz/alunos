@@ -38,14 +38,14 @@ app.use(express.urlencoded({ extended: true }));
   },
 ];**/
 
-app.get("/", (req, res) => {
-  res.render("home", {alunos: readAll()});
+app.get("/", async (req, res) => {
+  res.render("home", {alunos: await readAll()});
 });
 
-app.get("/cad-alt/:id?", (req, res) => {
+app.get("/cad-alt/:id?", async (req, res) => {
   if (req.params.id) {
     const id = Number(req.params.id);
-    const aluno = readOne(id)
+    const aluno = await readOne(id)
     //const aluno = alunos.find((aluno) => aluno.id == id);
     res.render("cad-alt", { aluno: aluno });
   } else {
@@ -53,8 +53,8 @@ app.get("/cad-alt/:id?", (req, res) => {
   }
 });
 
-app.delete("/alunos/:id", (req, res) => {
-  deleta(req.params.id)
+app.delete("/alunos/:id", async (req, res) => {
+  await deleta(req.params.id)
 
   // const id = Number(req.params.id);
   // for (let i = 0; i < alunos.length; i++) {
@@ -65,9 +65,9 @@ app.delete("/alunos/:id", (req, res) => {
   }
 );
 
-app.post("/alunos/:id?", (req, res) => {
+app.post("/alunos/:id?", async (req, res) => {
   if (req.params.id) {
-    update(req.body)
+    await update(req.body)
 
     // const id = Number(req.params.id);
     // const index = alunos.findIndex((aluno) => aluno.id == id);
@@ -81,7 +81,7 @@ app.post("/alunos/:id?", (req, res) => {
     // };
 
   } else {
-      create(req.body)
+     await create(req.body)
 
     // alunos.push({
     //   id: alunos.at(-1).id + 1,
