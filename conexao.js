@@ -13,7 +13,7 @@ export async function create(data){
 }
 
 export async function update(data){
-    const aluno = await Aluno.findByPk(id);
+    const aluno = await Aluno.findByPk(data.id);
     aluno.set({
         nome: data.nome,
         dataNasc: data.dataNasc,
