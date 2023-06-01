@@ -67,7 +67,7 @@ app.delete("/alunos/:id", async (req, res) => {
 
 app.post("/alunos/:id?", async (req, res) => {
   if (req.params.id) {
-    await update(req.body)
+    await update({id: req.params.id, ...req.body})
 
     // const id = Number(req.params.id);
     // const index = alunos.findIndex((aluno) => aluno.id == id);
