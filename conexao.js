@@ -9,6 +9,7 @@ export async function create(data){
         status: data.status,
         email: data.email,
     })
+   return resultadoCreate;
 }
 
 export async function update(data){
@@ -23,16 +24,17 @@ export async function update(data){
     })
 
     const resultadoUpdate = await aluno.save();
+    return resultadoUpdate;
 }
 
 export async function deleta(id){
-    Aluno.destroy({where: {id: id}})
+    return Aluno.destroy({where: {id: id}})
 }
 
 export async function readAll(){
-    const alunos = await Aluno.findAll();
+    return const alunos = await Aluno.findAll();
 }
 
 export async function readOne(id){
-    const livros = await Aluno.findByPk(id);
+    return const livros = await Aluno.findByPk(id);
 }
