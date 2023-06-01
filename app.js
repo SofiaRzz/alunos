@@ -11,7 +11,7 @@ app.set("views", "./views");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const alunos = [
+/**const alunos = [
   {
     id: 1,
     nome: "Sofia",
@@ -36,7 +36,7 @@ const alunos = [
     status: "Ativa",
     email: "fam2@aluno.ifal.edu.br",
   },
-];
+];**/
 
 app.get("/", (req, res) => {
   res.render("home", {alunos: readAll()});
